@@ -1,6 +1,6 @@
 const search = document.getElementById('search'),
 submit = document.getElementById('submit'),
-random = document.getElementById('random'),
+random = document.getElementById('random-btn'),
 meals = document.getElementById('meals'),
 resultHeading = document.getElementById('result-heading'),
 singleMeal = document.getElementById('single-meal');
@@ -64,14 +64,50 @@ function addToDOM(meal){
     const ingredients = [];
 
     for(let i = 1; i <= 20; i++){
-        if(meal[`strIngredient ${i}`]){
-            ingredients.push(`${meal[strIngredient${i}]}`);
+        if(meal[`strIngredient${i}`]){
+            ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`);
+        }else{
+            break;
         }
     }
+
+    singleMeal.innerHTML = `
+        <div class="single-meal">
+            <h1>${meal.strMeal}</h1>
+            <img src="${meal.strMealThumb}" alt = "${meal.strMeal}" />
+            <div class="single-meal-info">
+                ${meal.strCategory ? `<p>${meal.strCategory}</p>` : "" }
+                ${meal.strArea ? `<p>${meal.strArea}</p>` : "" }
+            </div>
+            <div class="main">
+                <p>${meal.strInstructions}</p>
+                <h2>Ingredients</h2>
+                <ul>
+                    ${ingredients.map(ing => `<li>${ing}</li>`).join("")}
+                </ul>
+            </div>
+        </div>
+    `
+}
+
+function randomMeal(){
+    // clear meal and heading
+    //console.log("working");
+    meals.innerHTML = "";
+    resultHeading.innerHTML = "";
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+    .then(res => res.json())
+    .then(data => {
+        const meal = data.meals[0];
+        addToDOM(meal);
+    });
 }
 
 //event listeners
 submit.addEventListener('submit', searchMeal);
+random.addEventListener('click', randomMeal);
+
 
 meals.addEventListener('click', e => {
     const mealInfo = e.path.find(item => {

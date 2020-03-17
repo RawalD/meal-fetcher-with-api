@@ -5,7 +5,8 @@
 }
 
 body{
-    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,9,1) 100%, rgba(255,0,0,1) 100%); */
     font-family: 'Anton', sans-serif;
     color: #fff;
     margin: 0;
@@ -99,6 +100,32 @@ input[type='text']{
 
 .meal:hover .meal-info{
     opacity: 1;
+}
+
+.single-meal{
+    margin: 30px auto;
+    width: 70%;
+}
+
+.single-meal img{
+    width: 300px;
+    margin: 15px;
+}
+
+.single-meal-info{
+    margin: 20px;
+    padding: 10px;
+}
+
+/* .single-meal p{
+    margin: 0;
+    letter-spacing: 0.5px;
+    line-height: 1.5px;
+} */
+
+.single-meal ul{
+    padding-left: 0;
+    list-style-type: none;
 }
 
 @media(max-width: 800px){
